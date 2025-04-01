@@ -9,13 +9,24 @@ class Field {
     constructor(field) {
       this._field = field;
     }
+    printField () {
+      let res = ''
+      for (let row of this._field) {
+        res += row.join('')
+        res += ('\n')
+      } console.log(res)
     }
+}
   
   const myField = new Field([
-    ['*', '░', 'O'],
-    ['░', 'O', '░'],
-    ['░', '^', '░'],
+    ['*', '░', 'O', '░', '░', 'O', '░', 'O', '░',],
+    ['░', 'O', '░', '░', '░', '░', 'O', '░', '░',],
+    ['░', '░', '░', '░', 'O', '░', '░', '░', 'O',],
+    ['░', 'O', '░', '░', 'O', 'O', 'O', '░', '░',],
+    ['░', 'O', '░', 'O', 'O', '░', '░', '^', '░',],
   ]);
   
-  console.log(myField._field.join('\n'))
-  //node Find-Your-hat.txt
+
+
+//console.log('',row1,'\n',row2,'\n',row3)
+//node main.js
