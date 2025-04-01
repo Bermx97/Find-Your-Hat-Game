@@ -10,23 +10,40 @@ class Field {
       this._field = field;
     }
     printField () {
-      let res = ''
+      let res = '';
       for (let row of this._field) {
-        res += row.join('')
-        res += ('\n')
-      } console.log(res)
+        res += row.join('');
+        res += ('\n');
+      } console.log(res);
     }
-}
+    playerPosition () {
+      let rowField = 0;
+      let columnField = 0;
+      for (let row of this._field) {
+        if (row.indexOf('*') > -1) {
+          columnField = row.indexOf('*');
+          break;
+        } else {
+          rowField += 1;
+        }
+      } return [rowField, columnField];
+    }
+};
   
   const myField = new Field([
-    ['*', '░', 'O', '░', '░', 'O', '░', 'O', '░',],
+    ['*', '░', 'O', 'O', '░', 'O', '░', 'O', '░',],
     ['░', 'O', '░', '░', '░', '░', 'O', '░', '░',],
-    ['░', '░', '░', '░', 'O', '░', '░', '░', 'O',],
-    ['░', 'O', '░', '░', 'O', 'O', 'O', '░', '░',],
+    ['░', '░', '░', 'O', 'O', '░', '░', '░', 'O',],
+    ['░', 'O', '░', '░', 'O', 'O', 'O', 'O', '░',],
     ['░', 'O', '░', 'O', 'O', '░', '░', '^', '░',],
   ]);
   
 
 
-//console.log('',row1,'\n',row2,'\n',row3)
+
+
+ 
 //node main.js
+myField.printField();
+console.log(myField.playerPosition())
+
