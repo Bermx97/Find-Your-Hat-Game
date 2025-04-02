@@ -85,7 +85,5 @@ const myField = new Field([
 
 //node main.js
 
-
-console.log(myField._field.length)
-
+process.stdout.write('hi \n \n')
 myField.printField()
