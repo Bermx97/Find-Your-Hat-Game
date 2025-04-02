@@ -31,37 +31,45 @@ class Field {
       } return [this._playerRow = rowField, this._playerColumn = columnField];
     } 
     moveUp () {
-      if (this._playerRow > 0) {
+      if (this._field[this._playerRow - 1][this._playerColumn] === 'O') {
+        throw new Error('Game over, you fell into a hole');
+      } else if (this._playerRow > 0) {
         this._field[this._playerRow - 1][this._playerColumn] = '*';
         this._playerRow --;
       } else {
         throw new Error('you have gone off track');
       }
-    }
-    moveDown () {
-      if (this._playerRow < this._field.length - 1) {
+    };
+    moveDown () { 
+      if (this._field[this._playerRow + 1][this._playerColumn] === 'O') {
+        throw new Error('Game over, you fell into a hole');
+      } else if (this._playerRow < this._field.length - 1) {
         this._field[this._playerRow + 1][this._playerColumn] = '*';
         this._playerRow ++;
       } else {
         throw new Error('you have gone off track'); 
       }
-    }
-    moveRight () {
-      if (this._playerColumn < this._field[0].length - 1) {
+    };
+    moveRight () { 
+      if (this._field[this._playerRow][this._playerColumn + 1] === 'O') {
+        throw new Error('Game over, you fell into a hole');
+      } else if (this._playerColumn < this._field[0].length - 1) {
         this._field[this._playerRow][this._playerColumn + 1] = '*';
         this._playerColumn ++;
       } else {
         throw new Error('you have gone off track');
       }
-    }
+    };
     moveLeft () {
-      if (this._playerColumn > 0) {
+      if (this._field[this._playerRow][this._playerColumn - 1] === 'O') {
+        throw new Error('Game over, you fell into a hole');
+      } else if (this._playerColumn > 0) {
         this._field[this._playerRow][this._playerColumn - 1] = '*';
         this._playerColumn --;
       } else {
         throw new Error('you have gone off track');
       }
-    }
+    };
 };
 
 
@@ -76,8 +84,6 @@ const myField = new Field([
   
 
 //node main.js
-
-
 
 
 console.log(myField._field.length)
