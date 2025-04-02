@@ -8,8 +8,8 @@ const pathCharacter = '*';
 class Field { 
     constructor(field) {
       this._field = field;
-      this._playerRow = 0;
-      this._playerColumn = 0;
+      this._playerRow = this.playerPosition()[0];
+      this._playerColumn = this.playerPosition()[1];
     }
     printField () {
       let res = '';
@@ -19,66 +19,67 @@ class Field {
       } console.log(res);
     } 
     playerPosition () {
-      let rowField = []
-      let columnField = []
+      let rowField = 0;
+      let columnField = 0;
       for (let row of this._field) {
-        let iInRow = 0;
-        for (let symbol of row) {
-          let inColumnField = [];
-          let i = 0
-          if (symbol === '*') {
-            //console.log(symbol)
-            inColumnField.push(i)
-            i++
-          } else {
-            i++
-          } console.log(inColumnField)
+        if (row.indexOf('*') > -1) {
+          columnField = row.indexOf('*');
+          break;
+        } else {
+          rowField += 1;
         }
-    } console.log(columnField)
-  }
+      } return [this._playerRow = rowField, this._playerColumn = columnField];
+    } 
+    moveUp () {
+      if (this._playerRow > 0) {
+        this._field[this._playerRow - 1][this._playerColumn] = '*';
+        this._playerRow --;
+      } else {
+        throw new Error('you have gone off track');
+      }
+    }
+    moveDown () {
+      if (this._playerRow < this._field.length - 1) {
+        this._field[this._playerRow + 1][this._playerColumn] = '*';
+        this._playerRow ++;
+      } else {
+        throw new Error('you have gone off track'); 
+      }
+    }
+    moveRight () {
+      if (this._playerColumn < this._field[0].length - 1) {
+        this._field[this._playerRow][this._playerColumn + 1] = '*';
+        this._playerColumn ++;
+      } else {
+        throw new Error('you have gone off track');
+      }
+    }
+    moveLeft () {
+      if (this._playerColumn > 0) {
+        this._field[this._playerRow][this._playerColumn - 1] = '*';
+        this._playerColumn --;
+      } else {
+        throw new Error('you have gone off track');
+      }
+    }
 };
+
+
 const myField = new Field([
-    ['*', '░', 'O', 'O', '*', 'O', '░', 'O', '░',],
+    ['O', '░', 'O', 'O', 'O', 'O', '░', 'O', '░',],
     ['░', 'O', '░', '░', '░', '░', 'O', '░', '░',],
-    ['*', '░', '░', 'O', 'O', '░', '░', '░', 'O',],
-    ['*', 'O', '░', '░', 'O', 'O', 'O', 'O', '░',],
-    ['░', 'O', '░', 'O', 'O', '*', '░', '^', '*',],
+    ['O', '░', '░', 'O', 'O', '░', '░', '*', 'O',],
+    ['O', 'O', '░', '░', 'O', 'O', 'O', 'O', '░',],
+    ['░', 'O', '░', 'O', 'O', 'O', '░', '^', 'O',],
+    ['░', 'O', '░', 'O', 'O', 'O', '░', 'O', 'O',],
 ]);
   
 
-
-
-
 //node main.js
-myField.printField();
-myField.playerPosition()
-//console.log(myField.playerPosition())
-//console.log(myField._playerRow)
-//console.log(myField._playerColumn)
 
 
 
 
+console.log(myField._field.length)
 
-
-
-
-
-
-
-
-
-/* playerPosition () {
-  let rowField = 0;
-  let columnField = 0;
-  for (let row of this._field) {
-    if (row.indexOf('*') > -1) {
-      columnField = row.indexOf('*');
-      break;
-    } else {
-      rowField += 1;
-    }
-  } return [rowField, columnField];
-}
-};
-*/
+myField.printField()
