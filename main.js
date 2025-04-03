@@ -10,7 +10,7 @@ class Field {
       this._field = field;
       this._playerRow = this.playerPosition()[0];
       this._playerColumn = this.playerPosition()[1];
-      this._error = ''
+      this._error = '';
     }
     printField () {
       let res = '';
@@ -33,7 +33,7 @@ class Field {
     } 
     moveUp () {
       if (this._field[this._playerRow - 1][this._playerColumn] === '^') {
-        this._error = 'Congrats you won q:D ';
+        this._error = 'Congrats you won <:D ';
       } else if (this._field[this._playerRow - 1][this._playerColumn] === 'O') {
         this._error = 'Game over, you fell into a hole :c ';
       } else if (this._playerRow > 0) {
@@ -45,7 +45,7 @@ class Field {
     };
     moveDown () {
       if (this._field[this._playerRow + 1][this._playerColumn] === '^') {
-        this._error = 'Congrats you won q:D ';
+        this._error = 'Congrats you won <:D ';
       } else if (this._field[this._playerRow + 1][this._playerColumn] === 'O') {
         this._error = 'Game over, you fell into a hole :c ';
       } else if (this._playerRow < this._field.length - 1) {
@@ -57,7 +57,7 @@ class Field {
     };
     moveRight () { 
       if (this._field[this._playerRow][this._playerColumn + 1] === '^') {
-        this._error = 'Congrats you won q:D ';
+        this._error = 'Congrats you won <:D ';
       } else if (this._field[this._playerRow][this._playerColumn + 1] === 'O') {
         this._error = 'Game over, you fell into a hole :c ';
       } else if (this._playerColumn < this._field[0].length - 1) {
@@ -69,7 +69,7 @@ class Field {
     };
     moveLeft () {
       if (this._field[this._playerRow][this._playerColumn - 1] === '^') {
-        this._error = 'Congrats you won q:D ';
+        this._error = 'Congrats you won <:D ';
       } if (this._field[this._playerRow][this._playerColumn - 1] === 'O') {
         this._error = 'Game over, you fell into a hole :c ';
       } else if (this._playerColumn > 0) {
