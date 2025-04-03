@@ -10,6 +10,7 @@ class Field {
       this._field = field;
       this._playerRow = this.playerPosition()[0];
       this._playerColumn = this.playerPosition()[1];
+      this._error = ''
     }
     printField () {
       let res = '';
@@ -31,59 +32,99 @@ class Field {
       } return [this._playerRow = rowField, this._playerColumn = columnField];
     } 
     moveUp () {
-      if (this._field[this._playerRow - 1][this._playerColumn] === 'O') {
-        throw new Error('Game over, you fell into a hole');
+      if (this._field[this._playerRow - 1][this._playerColumn] === '^') {
+        this._error = 'Congrats you won q:D ';
+      } else if (this._field[this._playerRow - 1][this._playerColumn] === 'O') {
+        this._error = 'Game over, you fell into a hole :c ';
       } else if (this._playerRow > 0) {
         this._field[this._playerRow - 1][this._playerColumn] = '*';
         this._playerRow --;
       } else {
-        throw new Error('you have gone off track');
+        this._error = 'you have gone off track :c ';
       }
     };
-    moveDown () { 
-      if (this._field[this._playerRow + 1][this._playerColumn] === 'O') {
-        throw new Error('Game over, you fell into a hole');
+    moveDown () {
+      if (this._field[this._playerRow + 1][this._playerColumn] === '^') {
+        this._error = 'Congrats you won q:D ';
+      } else if (this._field[this._playerRow + 1][this._playerColumn] === 'O') {
+        this._error = 'Game over, you fell into a hole :c ';
       } else if (this._playerRow < this._field.length - 1) {
         this._field[this._playerRow + 1][this._playerColumn] = '*';
         this._playerRow ++;
       } else {
-        throw new Error('you have gone off track'); 
+        this._error = 'You have gone off track :c '; 
       }
     };
     moveRight () { 
-      if (this._field[this._playerRow][this._playerColumn + 1] === 'O') {
-        throw new Error('Game over, you fell into a hole');
+      if (this._field[this._playerRow][this._playerColumn + 1] === '^') {
+        this._error = 'Congrats you won q:D ';
+      } else if (this._field[this._playerRow][this._playerColumn + 1] === 'O') {
+        this._error = 'Game over, you fell into a hole :c ';
       } else if (this._playerColumn < this._field[0].length - 1) {
         this._field[this._playerRow][this._playerColumn + 1] = '*';
         this._playerColumn ++;
       } else {
-        throw new Error('you have gone off track');
+        this._error = 'You have gone off track :c ';
       }
     };
     moveLeft () {
-      if (this._field[this._playerRow][this._playerColumn - 1] === 'O') {
-        throw new Error('Game over, you fell into a hole');
+      if (this._field[this._playerRow][this._playerColumn - 1] === '^') {
+        this._error = 'Congrats you won q:D ';
+      } if (this._field[this._playerRow][this._playerColumn - 1] === 'O') {
+        this._error = 'Game over, you fell into a hole :c ';
       } else if (this._playerColumn > 0) {
         this._field[this._playerRow][this._playerColumn - 1] = '*';
         this._playerColumn --;
       } else {
-        throw new Error('you have gone off track');
-      }
+        this._error = 'You have gone off track :c ';
+      }  
     };
-};
-
+    startGame () {
+      this.printField()
+      while (this._error === '') {
+        const way = prompt('Witch way? ')
+        if (way === 'l') {
+          this.moveLeft();
+          this.printField();
+          } else if (way === 'r') {
+            this.moveRight();
+            myField.printField();
+          } else if (way === 'd') {
+            this.moveDown();
+            this.printField();
+          } else if (way === 'u') {
+            this.moveUp();
+            this.printField();
+          } else {
+           console.log('Please give correct direction');
+        } 
+      } if (this._error !== '') {
+        console.log(this._error)
+    }
+  }
+ }
 
 const myField = new Field([
-    ['O', '░', 'O', 'O', 'O', 'O', '░', 'O', '░',],
-    ['░', 'O', '░', '░', '░', '░', 'O', '░', '░',],
-    ['O', '░', '░', 'O', 'O', '░', '░', '*', 'O',],
-    ['O', 'O', '░', '░', 'O', 'O', 'O', 'O', '░',],
-    ['░', 'O', '░', 'O', 'O', 'O', '░', '^', 'O',],
-    ['░', 'O', '░', 'O', 'O', 'O', '░', 'O', 'O',],
+    ['O', '░', 'O', 'O', 'O', 'O', '░', 'O', '░', '░', 'O', '░', 'O', '░', 'O', '░', 'O', 'O'],
+    ['░', 'O', '░', '░', '░', '░', 'O', '░', '░', '░', 'O', '░', '░', '░', '░', 'O', '░', '░'],
+    ['O', '░', '░', 'O', 'O', '░', '░', 'O', 'O', '░', 'O', '░', 'O', '░', 'O', '░', 'O', 'O'],
+    ['O', '░', '░', '░', '░', 'O', '░', '░', '░', '░', '░', '░', '░', '░', '░', 'O', '░', '░'],
+    ['O', '*', '░', '░', '░', 'O', '░', '░', '░', '░', '░', '░', '░', '░', '░', 'O', '░', '░'],
+    ['░', '░', '░', 'O', '░', '░', '░', 'O', 'O', '░', '░', '░', 'O', '░', '░', '░', '░', 'O'],
+    ['░', 'O', '░', 'O', '░', 'O', '░', 'O', 'O', '░', '░', 'O', '░', '░', '░', '^', 'O', '░'],
+    ['░', 'O', '░', '░', '░', 'O', '░', '░', '░', 'O', '░', '░', '░', 'O', '░', '░', '░', 'O'],
+    ['O', '░', '░', '░', '░', 'O', '░', '░', '░', '░', '░', '░', '░', '░', '░', 'O', '░', '░'],
 ]);
   
 
 //node main.js
+//myField.printField()
 
-process.stdout.write('hi \n \n')
-myField.printField()
+
+const answ = prompt('Do you want to play ?')
+if (answ === 'yes') {
+  myField.startGame()
+} else {
+  console.log ('ohh, say: yes')
+}
+
