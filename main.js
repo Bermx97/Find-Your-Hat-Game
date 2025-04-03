@@ -80,26 +80,24 @@ class Field {
       }  
     };
     startGame () {
-      this.printField()
       while (this._error === '') {
-        const way = prompt('Witch way? ')
+        this.printField();
+        const way = prompt('Witch way? ');
         if (way === 'l') {
           this.moveLeft();
-          this.printField();
           } else if (way === 'r') {
             this.moveRight();
-            myField.printField();
           } else if (way === 'd') {
             this.moveDown();
-            this.printField();
           } else if (way === 'u') {
             this.moveUp();
-            this.printField();
+          } else if (way === 'end') {
+            this._error = 'Game Over'
           } else {
-           console.log('Please give correct direction');
+            console.log('Please give correct direction');
         } 
       } if (this._error !== '') {
-        console.log(this._error)
+        console.log(this._error);
     }
   }
  }
