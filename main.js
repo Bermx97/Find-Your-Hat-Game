@@ -118,8 +118,6 @@ const myField = new Field([
   
 
 //node main.js
-//myField.printField()
-
 
 const answ = prompt('Do you want to play ?')
 if (answ === 'yes') {
