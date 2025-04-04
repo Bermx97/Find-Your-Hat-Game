@@ -35,7 +35,7 @@ const myField = new Field([
 - Hat = '^'
 - Hole = 'O'
 - FieldCharacter = '░'
-- PathCharacter = '*'
+- PathCharacter = '*' > 'only one!'
 
 ### If you want random field:
 
