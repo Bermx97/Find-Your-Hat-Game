@@ -92,35 +92,48 @@ class Field {
           } else if (way === 'u') {
             this.moveUp();
           } else if (way === 'end') {
-            this._error = 'Game Over'
+            this._error = 'Game Over';
           } else {
             console.log('Please give correct direction');
         } 
       } if (this._error !== '') {
         console.log(this._error);
     }
-  }
- }
+  };
+   randomField (height, width, perc) {
+    let field = [
 
-const myField = new Field([
-    ['O', '░', 'O', 'O', 'O', 'O', '░', 'O', '░', '░', 'O', '░', 'O', '░', 'O', '░', 'O', 'O'],
-    ['░', 'O', '░', '░', '░', '░', 'O', '░', '░', '░', 'O', '░', '░', '░', '░', 'O', '░', '░'],
-    ['O', '░', '░', 'O', 'O', '░', '░', 'O', 'O', '░', 'O', '░', 'O', '░', 'O', '░', 'O', 'O'],
-    ['O', '░', '░', '░', '░', 'O', '░', '░', '░', '░', '░', '░', '░', '░', '░', 'O', '░', '░'],
-    ['O', '*', '░', '░', '░', 'O', '░', '░', '░', '░', '░', '░', '░', '░', '░', 'O', '░', '░'],
-    ['░', '░', '░', 'O', '░', '░', '░', 'O', 'O', '░', '░', '░', 'O', '░', '░', '░', '░', 'O'],
-    ['░', 'O', '░', 'O', '░', 'O', '░', 'O', 'O', '░', '░', 'O', '░', '░', '░', '^', 'O', '░'],
-    ['░', 'O', '░', '░', '░', 'O', '░', '░', '░', 'O', '░', '░', '░', 'O', '░', '░', '░', 'O'],
-    ['O', '░', '░', '░', '░', 'O', '░', '░', '░', '░', '░', '░', '░', '░', '░', 'O', '░', '░'],
-]);
+]
+//makes row with random character, you can change the percentage of holes thanks this
+  const randomArr = (width, perc) => {
+    let arr = [];
+    while (arr.length < width) {
+        let percent = Math.floor(Math.random() * 100);
+        if(percent <= perc) {
+            arr.push('O');
+        } else { 
+            arr.push('░');
+        }
+       } return arr;
+}; // makes columns with random rows
+   while (field.length !== height) {
+        field.push(randomArr(width, perc));
+  } field[0][0] = '*';
+    field[Math.floor(Math.random() * height)][Math.floor(Math.random() * width)] = '^';
+    this._field = field;
+
+  };
+};
+
+
+const myField = new Field([]);
   
+myField.randomField(8, 20, 33);
 
-//node main.js
-
-const answ = prompt('Do you want to play ?')
+const answ = prompt('Do you want to play ?');
 if (answ === 'yes') {
-  myField.startGame()
+  myField.startGame();
 } else {
-  console.log ('ohh, say: yes')
-}
+  console.log ('ohh, just say: yes');
+};
 
