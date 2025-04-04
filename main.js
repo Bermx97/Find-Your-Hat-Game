@@ -32,28 +32,34 @@ class Field {
       } return [this._playerRow = rowField, this._playerColumn = columnField];
     } 
     moveUp () {
-      if (this._field[this._playerRow - 1][this._playerColumn] === '^') {
-        this._error = 'Congrats you won <:D ';
-      } else if (this._field[this._playerRow - 1][this._playerColumn] === 'O') {
-        this._error = 'Game over, you fell into a hole :c ';
-      } else if (this._playerRow > 0) {
-        this._field[this._playerRow - 1][this._playerColumn] = '*';
-        this._playerRow --;
-      } else {
-        this._error = 'you have gone off track :c ';
+      try {
+        if (this._field[this._playerRow - 1][this._playerColumn] === '^') {
+          this._error = 'Congrats you won <:D ';
+        } else if (this._field[this._playerRow - 1][this._playerColumn] === 'O') {
+          this._error = 'Game over, you fell into a hole :c ';
+        } else if (this._playerRow > 0) {
+          this._field[this._playerRow - 1][this._playerColumn] = '*';
+          this._playerRow --;
+        }
       }
+      catch(error) {
+        this._error = 'You have gone off track :c ';
+      };
     };
-    moveDown () {
-      if (this._field[this._playerRow + 1][this._playerColumn] === '^') {
-        this._error = 'Congrats you won <:D ';
-      } else if (this._field[this._playerRow + 1][this._playerColumn] === 'O') {
-        this._error = 'Game over, you fell into a hole :c ';
-      } else if (this._playerRow < this._field.length - 1) {
-        this._field[this._playerRow + 1][this._playerColumn] = '*';
-        this._playerRow ++;
-      } else {
-        this._error = 'You have gone off track :c '; 
+    moveDown () { 
+      try {
+        if (this._field[this._playerRow + 1][this._playerColumn] === '^') {
+          this._error = 'Congrats you won <:D ';
+        } else if (this._field[this._playerRow + 1][this._playerColumn] === 'O') {
+          this._error = 'Game over, you fell into a hole :c ';
+        } else if (this._playerRow < this._field.length - 1) {
+          this._field[this._playerRow + 1][this._playerColumn] = '*';
+          this._playerRow ++;
+        }
       }
+        catch(error) {
+          this._error = 'You have gone off track :c ';
+      };
     };
     moveRight () { 
       if (this._field[this._playerRow][this._playerColumn + 1] === '^') {
@@ -128,7 +134,7 @@ class Field {
 
 const myField = new Field([]);
   
-myField.randomField(8, 20, 33);
+myField.randomField(5, 23, 33)
 
 const answ = prompt('Do you want to play ?');
 if (answ === 'yes') {
