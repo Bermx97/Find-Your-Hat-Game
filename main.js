@@ -88,7 +88,7 @@ class Field {
     startGame () {
       while (this._error === '') {
         this.printField();
-        const way = prompt('Witch way? ');
+        const way = prompt('Which way? ');
         if (way === 'l') {
           this.moveLeft();
           } else if (way === 'r') {
